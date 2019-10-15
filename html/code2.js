@@ -12,7 +12,7 @@ function pageReady() {
     localVideo = document.getElementById('my');
     remoteVideo = document.getElementById('other');
 
-    serverConnection = new WebSocket('ws://127.0.0.1:3434');
+    serverConnection = new WebSocket('wss://127.0.0.1?user='+makeid(10));
     serverConnection.onmessage = gotMessageFromServer;
 
     var constraints = {
@@ -77,3 +77,18 @@ function gotRemoteStream(event) {
 function errorHandler(error) {
     console.log(error);
 }
+
+
+function makeid(length) {  //랜덤아이디 만들기 함수
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
+
+
+ pageReady();
